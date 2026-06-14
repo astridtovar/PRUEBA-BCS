@@ -1,0 +1,27 @@
+node_modules/
+.env
+.env.local
+.env.production
+
+# Frontend
+frontend/.next/
+frontend/out/
+frontend/coverage/
+frontend/.env.local
+frontend/.env.production
+frontend/playwright-report/
+frontend/test-results/
+
+# Backend
+backend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+.claude/
+.claude/settings.local.json

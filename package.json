@@ -1,0 +1,14 @@
+{
+  "name": "bcs-credit-digital",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start:dev --prefix backend\" --names frontend,backend --prefix-colors cyan,yellow",
+    "build": "npm run build --prefix frontend && npm run build --prefix backend",
+    "test": "npm run test --prefix frontend",
+    "test:e2e": "npm run test:e2e --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
