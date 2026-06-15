@@ -24,6 +24,18 @@ Micrositio de originación digital de crédito de libre destino, construido con 
 
 ---
 
+## Demo desplegada
+
+| Servicio  | URL                                                                                                              |
+| --------- | ---------------------------------------------------------------------------------------------------------------- |
+| Frontend  | [https://steadfast-intuition-production-3fb1.up.railway.app](https://steadfast-intuition-production-3fb1.up.railway.app) |
+| Backend   | [https://caring-radiance-production.up.railway.app](https://caring-radiance-production.up.railway.app)           |
+| Swagger   | [https://caring-radiance-production.up.railway.app/api/docs](https://caring-radiance-production.up.railway.app/api/docs) |
+
+Desplegado en Railway con dos servicios independientes (monorepo). Variables de entorno configuradas por servicio.
+
+---
+
 ## Ejecución local (sin Docker)
 
 ### Requisitos
