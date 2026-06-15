@@ -26,11 +26,13 @@ Micrositio de originación digital de crédito de libre destino, construido con 
 
 ## Demo desplegada
 
-| Servicio  | URL                                                                                                              |
-| --------- | ---------------------------------------------------------------------------------------------------------------- |
-| Frontend  | [https://steadfast-intuition-production-3fb1.up.railway.app](https://steadfast-intuition-production-3fb1.up.railway.app) |
-| Backend   | [https://caring-radiance-production.up.railway.app](https://caring-radiance-production.up.railway.app)           |
-| Swagger   | [https://caring-radiance-production.up.railway.app/api/docs](https://caring-radiance-production.up.railway.app/api/docs) |
+
+| Servicio | URL                                                                                                                      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Frontend | [https://steadfast-intuition-production-3fb1.up.railway.app](https://steadfast-intuition-production-3fb1.up.railway.app) |
+| Backend  | [https://caring-radiance-production.up.railway.app](https://caring-radiance-production.up.railway.app)                   |
+| Swagger  | [https://caring-radiance-production.up.railway.app/api/docs](https://caring-radiance-production.up.railway.app/api/docs) |
+
 
 Desplegado en Railway con dos servicios independientes (monorepo). Variables de entorno configuradas por servicio.
 
@@ -199,6 +201,24 @@ Flujos cubiertos:
 
 ---
 
+## Uso de herramientas de IA
+
+Durante el desarrollo se utilizó **Claude (Anthropic)** como herramienta de apoyo en las siguientes áreas, con validación manual en cada caso:
+
+
+| Área                      | Cómo se aplicó                                                                                                                                                                                            | Cómo se validó                                                                                                                                                         |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Pruebas automatizadas** | Generación de casos de prueba para schemas Zod, store de Zustand y pasos del wizard                                                                                                                       | Se revisó cada test case contra el comportamiento real del componente; se eliminaron los que no reflejaban escenarios reales y se ajustaron assertions incorrectas     |
+| **Documentación**         | Redacción inicial de las historias técnicas y sección de contratos API                                                                                                                                    | Se contrastaron contra el código fuente real (schemas, endpoints, store) y se corrigieron discrepancias; el contenido final refleja lo implementado                    |
+| **Implementación de UI**  | Generación de componentes y estructura de layouts a partir de las decisiones de diseño definidas por mi                                                                                                   | Se verificó visualmente que cada componente respetara el sistema de diseño acordado; se ajustaron estilos y comportamientos que no correspondían                       |
+| **Backend**               | Yo definí los contratos, estados, reglas de negocio y estructura del módulo; Claude apoyó en la implementación del código NestJS (controlador, DTOs, entidad, lógica de simulación y registro de eventos) | Se validó cada endpoint manualmente contra el consumo real del frontend; se verificaron los tres escenarios de simulación y el ciclo de vida completo de una solicitud |
+| **Despliegue**            | Configuración de Railway CLI, `railway.toml` y variables de entorno por servicio                                                                                                                          | Se verificó el funcionamiento end-to-end en los URLs desplegados antes de considerarlo completo                                                                        |
+
+
+Las decisiones de diseño fueron tomadas por mi: elección de shadcn/ui como sistema de componentes, paleta de colores bancaria en azul, tipografía, estructura de layouts y jerarquía visual. Claude asistió en la implementación de esas decisiones, no en definirlas. La arquitectura de la solución, el flujo de negocio y el criterio técnico sobre lo que se construyó y cómo son propios.
+
+---
+
 ## Decisiones técnicas
 
 ### Por qué TanStack Query en lugar de fetch directo en Client Components
@@ -211,4 +231,11 @@ El wizard multi-paso necesita estado que sobreviva navegación entre páginas pe
 
 ### Por qué Zod
 
-Zod v4 tiene una API más limpia con mensajes de error integrados directamente en los métodos (e.g., `z.number("mensaje")`). 
+Zod v4 tiene una API más limpia con mensajes de error integrados directamente en los métodos (e.g., `z.number("mensaje")`).
+
+---
+
+## Limitaciones
+
+- **Sin base de datos persistente:** el backend almacena las solicitudes en un `Map` en memoria. Los datos se pierden al reiniciar el servidor. En un entorno real se conectaría a una base de datos.
+
